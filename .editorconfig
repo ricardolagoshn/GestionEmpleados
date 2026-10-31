@@ -1,0 +1,14 @@
+root = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+charset = utf-8
+
+# Las pruebas usan la convención Metodo_Escenario_Resultado.
+[tests/**.cs]
+dotnet_diagnostic.CA1707.severity = none
+
+# Las migraciones son código generado por EF Core.
+[**/Migrations/*.cs]
+generated_code = true

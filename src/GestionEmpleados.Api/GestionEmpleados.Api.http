@@ -1,0 +1,83 @@
+@Api = http://localhost:5227
+
+### Catálogo de países
+GET {{Api}}/api/paises
+
+### Crear empleado (fotografía PNG 1x1 como Data URL)
+POST {{Api}}/api/empleados
+Content-Type: application/json
+
+{
+  "codigoEmpleado": "EMP-0002",
+  "nombres": "Carlos",
+  "apellidos": "Mejía Banegas",
+  "fechaNacimiento": "1990-03-15",
+  "cedula": "0801-1990-00002",
+  "paisId": 1,
+  "direccion": "San Pedro Sula, Cortés",
+  "genero": "masculino",
+  "telefono": "+504 8888-8888",
+  "correoElectronico": "carlos.mejia@empresa.com",
+  "fechaIngreso": "2026-10-31",
+  "cargo": "Desarrollador móvil",
+  "fotografiaBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+  "fotografiaTipoContenido": "image/png",
+  "fotografiaNombreArchivo": "carlos.png"
+}
+
+### Listar con filtros y paginación
+GET {{Api}}/api/empleados?search=mej&paisId=1&genero=masculino&page=1&pageSize=20&sortBy=apellidos&sortDirection=asc
+
+### Listar desactivados
+GET {{Api}}/api/empleados?activo=false
+
+### Obtener detalle
+GET {{Api}}/api/empleados/1
+
+### Actualizar (usar la "version" devuelta en la última consulta)
+PUT {{Api}}/api/empleados/1
+Content-Type: application/json
+
+{
+  "codigoEmpleado": "DEMO-0001",
+  "nombres": "Ana María",
+  "apellidos": "López Rodríguez",
+  "fechaNacimiento": "1995-08-20",
+  "cedula": "0801-1995-12345",
+  "paisId": 1,
+  "direccion": "Tegucigalpa, Francisco Morazán",
+  "genero": "femenino",
+  "telefono": "+504 9999-9999",
+  "correoElectronico": "ana.lopez@empresa.com",
+  "fechaIngreso": "2026-10-31",
+  "cargo": "Líder técnica",
+  "version": "REEMPLAZAR_CON_VERSION"
+}
+
+### Activar o desactivar
+PATCH {{Api}}/api/empleados/1/estado
+Content-Type: application/json
+
+{ "activo": false, "fechaSalida": "2026-12-31" }
+
+### Desactivación lógica
+DELETE {{Api}}/api/empleados/1
+
+### Descargar fotografía
+GET {{Api}}/api/empleados/1/fotografia
+
+### Reemplazar fotografía
+PUT {{Api}}/api/empleados/1/fotografia
+Content-Type: application/json
+
+{
+  "fotografiaBase64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+  "fotografiaTipoContenido": "image/png",
+  "fotografiaNombreArchivo": "nueva.png"
+}
+
+### Quitar fotografía
+DELETE {{Api}}/api/empleados/1/fotografia
+
+### Documento OpenAPI (solo en Development)
+GET {{Api}}/openapi/v1.json
